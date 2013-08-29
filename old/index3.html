@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap Core CSS-->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+       <!-- Custom styles for this template -->
+    <link href="css/custom.css" rel="stylesheet" media="screen">
+
+        <!-- JavaScript plugins (requires jQuery) -->
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+
+       <!-- Load Google Maps API -->
+     <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+
+
+
+    <!--Javascript for the button-->
+    <script>
+
+      $(document).ready(function(){
+
+        google.maps.visualRefresh = true;
+            var map;
+            var myPosition = 'http://www.robotwoods.com/dev/misc/bluecircle.png';
+
+            function initialize() {
+
+                /* Setting up Options for the map */
+              
+                var mapOptions = {
+                zoom: 14,
+                center: new google.maps.LatLng(38.898748,-77.037684),
+                mapTypeControl: false,
+                streetViewControl: false,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+              };
+
+              /* Creating a variable to put the map in the map-canvas ID, with the options declared above */
+
+              map = new google.maps.Map(document.getElementById("map-canvas"),
+                  mapOptions);
+
+               /* Creating new map layer for the Fusion Table data */
+
+               var layer = new google.maps.FusionTablesLayer({
+                  query: {
+                     select: '\'geometry\'',
+                    from: '1pjvEKEy9c7OaQ7L7oSRz3nkHNiMCXY0k89GSAus'
+                  },
+                  styleId: 2,
+                  templateId: 2,
+                  map: map
+                });
+
+              /* Placing the layer on the map */
+
+              layer.setMap(map);
+
+            }
+
+
+     /* Once the page has loaded, run the function to put a map on the page */
+
+            google.maps.event.addDomListener(window, 'load', initialize);
+
+
+      }); //end ready
+
+    </script>
+
+  </head>
+  <body>
+
+  <div class="navbar navbar-inverse navbar-fixed-top">
+
+    <div class="container">
+
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="navbar-brand" href="#">DCtrees</a>
+
+        <!--<div class="nav-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+
+        <div id="location-button">
+          <button type="button" class="btn btn-primary">Use My Location</button>
+        </div>
+
+
+    </div><!--/.container --> 
+
+  </div><!--/.navbar -->
+
+
+    <div id="map-canvas">
+
+    </div>
+
+
+
+
+  </body>
+</html>
